@@ -1,0 +1,210 @@
+{
+	"info": {
+		"_postman_id": "95b18209-31c4-4e95-9e73-a0c20211db72",
+		"name": "food_delivery",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "test@gmail.com",
+							"type": "default"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3001/api/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "sign_up",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "name",
+							"value": "test_user",
+							"type": "default"
+						},
+						{
+							"key": "mobile",
+							"value": "9876543210",
+							"type": "default"
+						},
+						{
+							"key": "email",
+							"value": "testuser1@gmail.com",
+							"type": "default"
+						},
+						{
+							"key": "password",
+							"value": "123456",
+							"type": "default"
+						},
+						{
+							"key": "address",
+							"value": "ST",
+							"type": "default"
+						},
+						{
+							"key": "device_type",
+							"value": "I",
+							"description": "I = iOS, A = Android",
+							"type": "default"
+						},
+						{
+							"key": "push_token",
+							"value": "",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3001/api/sign_up",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"sign_up"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "forgot_password_request",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "testuser1@gmail.com",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3001/api/forgot_password_request",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"forgot_password_request"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "forgot_password_verify",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "email",
+							"value": "testuser1@gmail.com",
+							"type": "default"
+						},
+						{
+							"key": "reset_code",
+							"value": "",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3001/api/forgot_password_verify",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"forgot_password_verify"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "forgot_password_set_new",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "user_id",
+							"value": "2",
+							"type": "default"
+						},
+						{
+							"key": "reset_code",
+							"value": "238422",
+							"type": "default"
+						},
+						{
+							"key": "new_password",
+							"value": "12345678",
+							"type": "default"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:3001/api/forgot_password_set_new",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3001",
+					"path": [
+						"api",
+						"forgot_password_set_new"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

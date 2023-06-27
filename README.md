@@ -2,7 +2,7 @@
 
 # codeforany @codeforany
 
-- [Youtube Full Playlist: Food Delivery Backend Api With Node Js Express REST Api & Socket.io Api ](https://www.youtube.com/playlist?list=PLzcRC7PA0xWRlYXalCqTqoC6csqUIJWCa)
+- [Youtube Full Playlist: Food Delivery Backend Api With Node Js Express REST Api & Socket.io Api ](https://www.youtube.com/playlist?list=PLzcRC7PA0xWR8hUMwl6PTxJSkwpP4O36X)
 - [Youtube Channel: @codeforany](https://www.youtube.com/channel/UCdQTp9wRK5vAOlEQZf9PHSg)
 - [Youtube Channel Subscribe: @codeforany](https://www.youtube.com/channel/UCdQTp9wRK5vAOlEQZf9PHSg?sub_confirmation=1)
 

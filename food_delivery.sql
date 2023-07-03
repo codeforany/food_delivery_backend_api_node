@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jun 27, 2023 at 07:27 AM
+-- Generation Time: Jul 03, 2023 at 07:11 AM
 -- Server version: 10.4.21-MariaDB
 -- PHP Version: 8.1.0
 
@@ -24,6 +24,281 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `about_detail`
+--
+
+CREATE TABLE `about_detail` (
+  `about_id` int(11) NOT NULL,
+  `detail` varchar(1000) NOT NULL DEFAULT '',
+  `display_order` int(11) NOT NULL DEFAULT 0,
+  `created_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `update_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `status` int(1) NOT NULL DEFAULT 1 COMMENT '1 = active, 2 = delete'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `card_detail`
+--
+
+CREATE TABLE `card_detail` (
+  `payment_method_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL DEFAULT 0,
+  `name` varchar(50) NOT NULL DEFAULT '' COMMENT '1 = card, 2 = online',
+  `card_number` varchar(40) NOT NULL DEFAULT '',
+  `card_mm` varchar(3) NOT NULL DEFAULT '01',
+  `card_yyyy` varchar(5) NOT NULL DEFAULT '2023',
+  `card_code` varchar(5) NOT NULL DEFAULT '000',
+  `first_name` varchar(50) NOT NULL DEFAULT '',
+  `last_name` varchar(50) NOT NULL DEFAULT '',
+  `is_remove_any` int(1) NOT NULL DEFAULT 1,
+  `create_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `update_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `status` int(11) NOT NULL DEFAULT 1 COMMENT '1 = active, 2 = delete'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `cart_detail`
+--
+
+CREATE TABLE `cart_detail` (
+  `cart_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL DEFAULT 0,
+  `restaurant_id` int(11) NOT NULL DEFAULT 0,
+  `menu_item_id` int(11) NOT NULL DEFAULT 0,
+  `portion_id` varchar(50) NOT NULL DEFAULT '',
+  `ingredient_id` varchar(50) NOT NULL DEFAULT '',
+  `qty` int(11) NOT NULL DEFAULT 1,
+  `create_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `update_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `status` int(1) NOT NULL DEFAULT 1 COMMENT '1 = active, 2 = delete'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `category_detail`
+--
+
+CREATE TABLE `category_detail` (
+  `category_id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL DEFAULT '',
+  `image` varchar(150) NOT NULL DEFAULT '',
+  `created_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `update_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `status` int(11) NOT NULL DEFAULT 1 COMMENT '1= active, 0= inactive, 2 = delete'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `favorite_detail`
+--
+
+CREATE TABLE `favorite_detail` (
+  `favorite_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL DEFAULT 0,
+  `menu_item_id` int(11) NOT NULL DEFAULT 0,
+  `created_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `update_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `status` int(1) NOT NULL DEFAULT 1 COMMENT '1 = Fav, 0 = Unfav'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `inbox_detail`
+--
+
+CREATE TABLE `inbox_detail` (
+  `inbox_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL DEFAULT 0,
+  `title` varchar(100) NOT NULL DEFAULT '',
+  `detail` varchar(1000) NOT NULL DEFAULT '',
+  `create_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `update_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `status` int(1) NOT NULL DEFAULT 0 COMMENT '0 = new, 1 = read, 2 delete'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `ingredient_detail`
+--
+
+CREATE TABLE `ingredient_detail` (
+  `ingredient_id` int(11) NOT NULL,
+  `menu_item_id` int(11) NOT NULL DEFAULT 0,
+  `name` varchar(75) NOT NULL DEFAULT '',
+  `addition_price` varchar(500) NOT NULL DEFAULT '',
+  `create_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `update_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `status` int(1) NOT NULL DEFAULT 1 COMMENT '1 = active, 0 = inactive, 2 = delete'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `menu_detail`
+--
+
+CREATE TABLE `menu_detail` (
+  `menu_id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL DEFAULT '',
+  `image` varchar(150) NOT NULL DEFAULT '',
+  `created_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `update_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `status` int(1) NOT NULL DEFAULT 1 COMMENT '1 = active, 0 = inactive, 2 = delete'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `menu_item_detail`
+--
+
+CREATE TABLE `menu_item_detail` (
+  `menu_item_id` int(11) NOT NULL,
+  `menu_id` int(11) NOT NULL DEFAULT 0,
+  `restaurant_id` int(11) NOT NULL DEFAULT 0,
+  `category_id` int(11) NOT NULL DEFAULT 0,
+  `food_type` varchar(100) NOT NULL DEFAULT '',
+  `name` varchar(150) NOT NULL DEFAULT '',
+  `image` varchar(150) NOT NULL DEFAULT '',
+  `is_portion_allow` int(1) NOT NULL DEFAULT 1 COMMENT '0 = inactive, 1 = active',
+  `is_custom_ingredient_allow` int(1) NOT NULL DEFAULT 1 COMMENT '0 = inactive, 1 = active',
+  `description` varchar(2000) NOT NULL DEFAULT '',
+  `base_price` double NOT NULL DEFAULT 0,
+  `create_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `update_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `status` int(1) NOT NULL DEFAULT 1 COMMENT '1= active, 0 = inactive, 2 = delete'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `notification_detail`
+--
+
+CREATE TABLE `notification_detail` (
+  `notification_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL DEFAULT 0,
+  `title` varchar(150) NOT NULL DEFAULT '',
+  `detail` varchar(500) NOT NULL DEFAULT '',
+  `ref_id` varchar(20) NOT NULL DEFAULT '',
+  `notification_type` varchar(3) NOT NULL DEFAULT '0',
+  `is_read` int(1) NOT NULL DEFAULT 0 COMMENT '0 = new, 1 = read',
+  `create_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `update_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `status` int(1) NOT NULL DEFAULT 1 COMMENT '1 = active, 2 = delete'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `offer_detail`
+--
+
+CREATE TABLE `offer_detail` (
+  `offer_id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL DEFAULT '',
+  `restaurant_id` int(11) NOT NULL DEFAULT 0,
+  `image` varchar(150) NOT NULL DEFAULT '',
+  `start_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `end_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `status` int(1) NOT NULL DEFAULT 1 COMMENT '1 = active, 0 = inactive, 2 = delete',
+  `create_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `update_date` datetime NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `order_detail`
+--
+
+CREATE TABLE `order_detail` (
+  `order_id` int(11) NOT NULL,
+  `cart_id` int(11) NOT NULL DEFAULT 0,
+  `delivery_address` varchar(500) NOT NULL DEFAULT '',
+  `delivery_lat` varchar(50) NOT NULL DEFAULT '0.0',
+  `delivery_long` varchar(50) NOT NULL DEFAULT '0.0',
+  `deliver_note` varchar(3000) NOT NULL DEFAULT '',
+  `sub_total` double NOT NULL DEFAULT 0,
+  `delivery_cost` double NOT NULL DEFAULT 0,
+  `payable_total` double NOT NULL DEFAULT 0,
+  `order_status` int(2) NOT NULL DEFAULT 0 COMMENT '0=Pending Payment, 1 = order place, 2 = order ready, 3 = order out for delivery, 4 = deliverd, 5 = cancel, 6=refund',
+  `transaction_id` varchar(50) NOT NULL DEFAULT '',
+  `payment_method` int(1) NOT NULL DEFAULT 1 COMMENT '1 = cash on delivery, 2 = card payment, 3 = paypal',
+  `payment_status` int(1) NOT NULL DEFAULT 0 COMMENT '0=waiting, 1 = success, 2 = fail, 3 = refund',
+  `create_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `update_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `status` int(1) NOT NULL DEFAULT 1 COMMENT '1 = active, 2 = delete'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `portion_detail`
+--
+
+CREATE TABLE `portion_detail` (
+  `portion_id` int(11) NOT NULL,
+  `menu_item_id` int(11) NOT NULL,
+  `name` varchar(50) NOT NULL DEFAULT '',
+  `addition_price` double NOT NULL DEFAULT 0,
+  `create_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `update_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `status` int(1) NOT NULL DEFAULT 1 COMMENT '1= active, 0 = inactive , 2 = delete'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `restaurant_detail`
+--
+
+CREATE TABLE `restaurant_detail` (
+  `restaurant_id` int(11) NOT NULL,
+  `name` varchar(100) NOT NULL DEFAULT '',
+  `image` varchar(150) NOT NULL DEFAULT '',
+  `shop_type` varchar(50) NOT NULL DEFAULT '',
+  `food_type` varchar(150) NOT NULL DEFAULT '',
+  `address` varchar(200) NOT NULL DEFAULT '',
+  `city` varchar(50) NOT NULL DEFAULT '',
+  `state` varchar(50) NOT NULL DEFAULT '',
+  `latitude` double NOT NULL DEFAULT 0,
+  `longitude` double NOT NULL DEFAULT 0,
+  `delivery_cost` double NOT NULL DEFAULT 0,
+  `create_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `update_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `status` int(1) NOT NULL DEFAULT 1 COMMENT '1 = Active, 0 = inActive , 2 = delete'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `review_detail`
+--
+
+CREATE TABLE `review_detail` (
+  `review_id` int(11) NOT NULL,
+  `restaurant_id` int(11) NOT NULL DEFAULT 0,
+  `user_id` int(11) NOT NULL DEFAULT 0,
+  `order_id` int(11) NOT NULL DEFAULT 0,
+  `rate` int(11) NOT NULL DEFAULT 0,
+  `message` varchar(2000) NOT NULL DEFAULT '',
+  `create_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `update_date` datetime NOT NULL DEFAULT current_timestamp(),
+  `status` int(1) NOT NULL DEFAULT 1 COMMENT '1 = active, 2 = delete'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user_detail`
 --
 
@@ -36,6 +311,7 @@ CREATE TABLE `user_detail` (
   `address` varchar(500) NOT NULL DEFAULT '',
   `image` varchar(100) NOT NULL DEFAULT '',
   `device_type` varchar(10) NOT NULL DEFAULT 'I' COMMENT 'I = iOS, A = Android, W = Web',
+  `user_type` int(1) NOT NULL DEFAULT 1 COMMENT '1 = User, 3 = Admin',
   `auth_token` varchar(100) NOT NULL DEFAULT '',
   `push_token` varchar(100) NOT NULL DEFAULT '',
   `created_date` datetime NOT NULL DEFAULT current_timestamp(),
@@ -48,13 +324,104 @@ CREATE TABLE `user_detail` (
 -- Dumping data for table `user_detail`
 --
 
-INSERT INTO `user_detail` (`user_id`, `name`, `email`, `password`, `mobile`, `address`, `image`, `device_type`, `auth_token`, `push_token`, `created_date`, `update_date`, `reset_code`, `status`) VALUES
-(1, '', 'test@gmail.com', '123456', '', '', '', 'I', 'O7KQviEE8APVfpa5PVvX', '', '2023-06-23 12:04:48', '2023-06-23 12:04:48', '456789', 1),
-(2, 'test_user', 'testuser1@gmail.com', '12345678', '9876543210', 'ST', '', 'I', 'Shp36ufwjaWpmhzrdFIM', '', '2023-06-27 10:35:06', '2023-06-27 10:35:06', '158023', 1);
+INSERT INTO `user_detail` (`user_id`, `name`, `email`, `password`, `mobile`, `address`, `image`, `device_type`, `user_type`, `auth_token`, `push_token`, `created_date`, `update_date`, `reset_code`, `status`) VALUES
+(1, 'admin', 'admin@gmail.com', '123456', '', '', '', 'I', 3, 'O7KQviEE8APVfpa5PVvX', '', '2023-06-23 12:04:48', '2023-06-23 12:04:48', '456789', 1),
+(2, 'test_user', 'testuser1@gmail.com', '123456', '9876543210', 'ST', '', 'I', 1, 'VtRUGUbl5BgD4QZaVmr4', '', '2023-06-27 10:35:06', '2023-06-27 10:35:06', '007855', 1),
+(3, 'testuser2', 'testuser2@gmail.com', '1234567', '9876543210', 'Surat', '', 'I', 1, 'hvkIj2nNUnsGKW92VzIB', '', '2023-06-29 10:54:21', '2023-06-29 10:54:21', '653749', 1);
 
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `about_detail`
+--
+ALTER TABLE `about_detail`
+  ADD PRIMARY KEY (`about_id`);
+
+--
+-- Indexes for table `card_detail`
+--
+ALTER TABLE `card_detail`
+  ADD PRIMARY KEY (`payment_method_id`);
+
+--
+-- Indexes for table `cart_detail`
+--
+ALTER TABLE `cart_detail`
+  ADD PRIMARY KEY (`cart_id`);
+
+--
+-- Indexes for table `category_detail`
+--
+ALTER TABLE `category_detail`
+  ADD PRIMARY KEY (`category_id`);
+
+--
+-- Indexes for table `favorite_detail`
+--
+ALTER TABLE `favorite_detail`
+  ADD PRIMARY KEY (`favorite_id`);
+
+--
+-- Indexes for table `inbox_detail`
+--
+ALTER TABLE `inbox_detail`
+  ADD PRIMARY KEY (`inbox_id`);
+
+--
+-- Indexes for table `ingredient_detail`
+--
+ALTER TABLE `ingredient_detail`
+  ADD PRIMARY KEY (`ingredient_id`);
+
+--
+-- Indexes for table `menu_detail`
+--
+ALTER TABLE `menu_detail`
+  ADD PRIMARY KEY (`menu_id`);
+
+--
+-- Indexes for table `menu_item_detail`
+--
+ALTER TABLE `menu_item_detail`
+  ADD PRIMARY KEY (`menu_item_id`);
+
+--
+-- Indexes for table `notification_detail`
+--
+ALTER TABLE `notification_detail`
+  ADD PRIMARY KEY (`notification_id`);
+
+--
+-- Indexes for table `offer_detail`
+--
+ALTER TABLE `offer_detail`
+  ADD PRIMARY KEY (`offer_id`);
+
+--
+-- Indexes for table `order_detail`
+--
+ALTER TABLE `order_detail`
+  ADD PRIMARY KEY (`order_id`);
+
+--
+-- Indexes for table `portion_detail`
+--
+ALTER TABLE `portion_detail`
+  ADD PRIMARY KEY (`portion_id`);
+
+--
+-- Indexes for table `restaurant_detail`
+--
+ALTER TABLE `restaurant_detail`
+  ADD PRIMARY KEY (`restaurant_id`);
+
+--
+-- Indexes for table `review_detail`
+--
+ALTER TABLE `review_detail`
+  ADD PRIMARY KEY (`review_id`);
 
 --
 -- Indexes for table `user_detail`
@@ -67,10 +434,100 @@ ALTER TABLE `user_detail`
 --
 
 --
+-- AUTO_INCREMENT for table `about_detail`
+--
+ALTER TABLE `about_detail`
+  MODIFY `about_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `card_detail`
+--
+ALTER TABLE `card_detail`
+  MODIFY `payment_method_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `cart_detail`
+--
+ALTER TABLE `cart_detail`
+  MODIFY `cart_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `category_detail`
+--
+ALTER TABLE `category_detail`
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `favorite_detail`
+--
+ALTER TABLE `favorite_detail`
+  MODIFY `favorite_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `inbox_detail`
+--
+ALTER TABLE `inbox_detail`
+  MODIFY `inbox_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `ingredient_detail`
+--
+ALTER TABLE `ingredient_detail`
+  MODIFY `ingredient_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `menu_detail`
+--
+ALTER TABLE `menu_detail`
+  MODIFY `menu_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `menu_item_detail`
+--
+ALTER TABLE `menu_item_detail`
+  MODIFY `menu_item_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `notification_detail`
+--
+ALTER TABLE `notification_detail`
+  MODIFY `notification_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `offer_detail`
+--
+ALTER TABLE `offer_detail`
+  MODIFY `offer_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `order_detail`
+--
+ALTER TABLE `order_detail`
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `portion_detail`
+--
+ALTER TABLE `portion_detail`
+  MODIFY `portion_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `restaurant_detail`
+--
+ALTER TABLE `restaurant_detail`
+  MODIFY `restaurant_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `review_detail`
+--
+ALTER TABLE `review_detail`
+  MODIFY `review_id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `user_detail`
 --
 ALTER TABLE `user_detail`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

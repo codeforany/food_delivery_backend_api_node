@@ -1,0 +1,215 @@
+1)User Detail:
+
+user_id 
+name
+email
+password
+mobile
+address
+image
+device_type (iOS, Android)
+auth_token
+push_token
+reset_code
+user_type  (1 = user,  3 = admin)
+create_date
+update_date
+status
+
+2)Restaurants Detail:
+
+restaurant_id 
+name
+image
+shop_type
+food_type
+address
+city,
+state,
+lat,
+long,
+delivery_cost
+create_date
+update_date
+status
+
+
+3)Offer List Detail:
+
+offer_id
+name
+restaurant_id
+image
+start_date
+end_date
+discount_type (fixed, per)
+discount
+min_amount
+status
+create_date
+update_date
+
+
+4)Category Detail:
+
+category_id
+name 
+image
+create_date
+update_date
+status
+
+
+5)Menu Detail:
+
+menu_id
+name 
+image
+create_date
+update_date
+status
+
+
+6)Menu Item Detail:
+
+menu_item_id
+menu_id
+restaurant_id
+category_id
+food_type
+name
+image
+is_portion_allow
+is_custom_ingredient_allow
+description
+base_price
+create_date
+update_date
+status
+
+
+7)Portion Detail:
+
+portion_id
+menu_item_id
+name
+addition_price
+create_date
+update_date
+status
+
+
+8)Customize Ingredient Detail:
+
+ingredient_id
+menu_item_id
+name
+addition_price
+create_date
+update_date
+status
+
+
+9)FavoriteDetail:
+
+favorite_id
+user_id
+menu_item_id
+create_date
+update_date
+status
+
+
+10)RestaurantsReviewDetail:
+
+review_id
+restaurant_id
+order_id
+user_id
+write_review
+rate
+create_date
+update_date
+status
+
+11)User Cart Detail:
+
+cart_id
+user_id
+menu_item_id
+portion_id
+ingredient_id
+qty
+create_date
+update_date
+status
+
+
+12)User Order Detail:
+
+order_id
+cart_id
+delivery_address
+delivery_lat
+delivery_long
+delivery_note
+sub_total
+delivery_cost
+payable_total
+order_status (0= Pending Payment , 1= Order Place, 2= Order Ready, 3= Order Out For Delivery, 4= Delivered, 5= Cancel, 6= Refund)
+transaction_id
+payment_method (1 = Cash on delivery, 2 = card payment, 3 = paypal)
+payment_status (0 = waiting, 1 = success, 2 = fail, 3 refund)
+create_date
+update_date
+status
+
+
+13)User Payment Method Detail:
+
+user_id
+payment_type
+name
+card_number
+card_mm
+card_yyyy
+card_code
+card_first_name
+card_last_name
+is_remove_any_time
+create_date
+update_date
+status
+
+14)User Notification Detail:
+
+notification_id
+user_id
+title
+detail
+ref_id
+notification_type
+create_date
+update_date
+status
+
+
+15)User Inbox Detail:
+
+inbox_id
+user_id
+title
+detail
+create_date
+update_date
+status
+
+16)About Detail:
+
+about_id
+detail
+order
+create_date
+update_date
+status
+

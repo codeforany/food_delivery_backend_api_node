@@ -10,7 +10,7 @@
 - [Youtube Video: Food Delivery Node Express Api Base Setup With MySQL Connection](https://youtu.be/kmcd231SVIo)
 - [Youtube Video - 1: Food Delivery Node Express REST Api Login Flow (Login Api, Sign Up Api, Forgot Password Request Api, Forgot Password Verify Api, Forgot Password Set New Password Api) ](https://youtu.be/2-OXydrC9IY)
 
-- [Youtube Video - 2: Food Delivery My Sql Database Design Table & Relationship Manager) ](https://youtu.be/axkwWDo1o-s)
+- [Youtube Video - 2: Food Delivery My Sql in Full App Database Design Table & Relationship Manager) ](https://youtu.be/axkwWDo1o-s)
 
 
 A new node express project.

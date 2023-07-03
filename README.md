@@ -12,6 +12,29 @@
 
 - [Youtube Video - 2: Food Delivery My Sql in Full App Database Design Table & Relationship Manager) ](https://youtu.be/axkwWDo1o-s)
 
+- [Youtube Video - 3: Food Delivery Create Admin With Tokenization Api) ](https://youtu.be/M7OkuJI47OY)
+
+<b> Admin Api: </b>
+1) Add Restaurant Api
+2) Update Restaurant Api
+3) Update Restaurant Image Api
+4) Delete Restaurant Api
+5) Restaurant List Api
+6) Create Restaurant Offer Api
+7) Update Restaurant Offer Api
+8) Delete Restaurant Offer Api
+9) Active Inactive Restaurant Offer Api
+10) Restaurant Offer List Api
+11) Crate About Detail Api
+12) Update About Detail Api
+13) Delete About Detail Api
+14) About Detail List Api
+
+<b> App Api: </b>
+15) Update User Profile Api
+16) Update User Profile Image Api
+
+
 
 A new node express project.
 ## Getting Started

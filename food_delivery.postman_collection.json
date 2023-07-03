@@ -6,6 +6,934 @@
 	},
 	"item": [
 		{
+			"name": "AppApi",
+			"item": [
+				{
+					"name": "sign_up",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "test_user",
+									"type": "default"
+								},
+								{
+									"key": "mobile",
+									"value": "9876543210",
+									"type": "default"
+								},
+								{
+									"key": "email",
+									"value": "testuser1@gmail.com",
+									"type": "default"
+								},
+								{
+									"key": "password",
+									"value": "123456",
+									"type": "default"
+								},
+								{
+									"key": "address",
+									"value": "ST",
+									"type": "default"
+								},
+								{
+									"key": "device_type",
+									"value": "I",
+									"description": "I = iOS, A = Android",
+									"type": "default"
+								},
+								{
+									"key": "push_token",
+									"value": "",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/sign_up",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"sign_up"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forgot_password_request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "testuser1@gmail.com",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/forgot_password_request",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"forgot_password_request"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forgot_password_verify",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "testuser1@gmail.com",
+									"type": "default"
+								},
+								{
+									"key": "reset_code",
+									"value": "",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/forgot_password_verify",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"forgot_password_verify"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "forgot_password_set_new",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "user_id",
+									"value": "2",
+									"type": "default"
+								},
+								{
+									"key": "reset_code",
+									"value": "238422",
+									"type": "default"
+								},
+								{
+									"key": "new_password",
+									"value": "12345678",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/forgot_password_set_new",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"forgot_password_set_new"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_profile",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "access_token",
+								"value": "VtRUGUbl5BgD4QZaVmr4",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "user1",
+									"type": "default"
+								},
+								{
+									"key": "mobile",
+									"value": "9876543210",
+									"type": "default"
+								},
+								{
+									"key": "address",
+									"value": "asd",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/update_profile",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"update_profile"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update_image",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "access_token",
+								"value": "O7KQviEE8APVfpa5PVvX",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/Users/CodeForAny/Desktop/CodeForAny/Flutter/food_delivery/assets/img/res_2.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/update_image",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"update_image"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AdminApi",
+			"item": [
+				{
+					"name": "offer",
+					"item": [
+						{
+							"name": "restaurant_offer_add",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "access_token",
+										"value": "O7KQviEE8APVfpa5PVvX",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Offer1",
+											"type": "default"
+										},
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/Users/CodeForAny/Desktop/CodeForAny/Flutter/food_delivery/assets/img/res_1.png"
+										},
+										{
+											"key": "restaurant_id",
+											"value": "1",
+											"type": "default"
+										},
+										{
+											"key": "start_date",
+											"value": "2023-07-03 12:00:00",
+											"type": "default"
+										},
+										{
+											"key": "end_date",
+											"value": "2023-07-20 12:00:00",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3001/api/admin/restaurant_offer_add",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"api",
+										"admin",
+										"restaurant_offer_add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "restaurant_offer_update",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "access_token",
+										"value": "O7KQviEE8APVfpa5PVvX",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Offer1",
+											"type": "default"
+										},
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/Users/CodeForAny/Desktop/CodeForAny/Flutter/food_delivery/assets/img/res_1.png"
+										},
+										{
+											"key": "restaurant_id",
+											"value": "1",
+											"type": "default"
+										},
+										{
+											"key": "start_date",
+											"value": "2023-07-03 12:00:00",
+											"type": "default"
+										},
+										{
+											"key": "end_date",
+											"value": "2023-07-20 12:00:00",
+											"type": "default"
+										},
+										{
+											"key": "offer_id",
+											"value": "1",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3001/api/admin/restaurant_offer_update",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"api",
+										"admin",
+										"restaurant_offer_update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "restaurant_offer_list",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "access_token",
+										"value": "O7KQviEE8APVfpa5PVvX",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
+								"url": {
+									"raw": "http://localhost:3001/api/admin/restaurant_offer_list",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"api",
+										"admin",
+										"restaurant_offer_list"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "restaurant_offer_active_inactive",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "access_token",
+										"value": "O7KQviEE8APVfpa5PVvX",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "offer_id",
+											"value": "1",
+											"type": "default"
+										},
+										{
+											"key": "is_active",
+											"value": "0",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3001/api/admin/restaurant_offer_active_inactive",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"api",
+										"admin",
+										"restaurant_offer_active_inactive"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "restaurant_offer_delete",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "access_token",
+										"value": "O7KQviEE8APVfpa5PVvX",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "offer_id",
+											"value": "1",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3001/api/admin/restaurant_offer_delete",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"api",
+										"admin",
+										"restaurant_offer_delete"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "about",
+					"item": [
+						{
+							"name": "about_delete",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "access_token",
+										"value": "O7KQviEE8APVfpa5PVvX",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "about_id",
+											"value": "1",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3001/api/admin/about_delete",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"api",
+										"admin",
+										"about_delete"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "about_update",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "access_token",
+										"value": "O7KQviEE8APVfpa5PVvX",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "about_id",
+											"value": "1",
+											"type": "default"
+										},
+										{
+											"key": "detail",
+											"value": "Line1",
+											"type": "default"
+										},
+										{
+											"key": "display_order",
+											"value": "1",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3001/api/admin/about_update",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"api",
+										"admin",
+										"about_update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "about_add",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "access_token",
+										"value": "O7KQviEE8APVfpa5PVvX",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "detail",
+											"value": "Line1",
+											"type": "default"
+										},
+										{
+											"key": "display_order",
+											"value": "1",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3001/api/admin/about_add",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"api",
+										"admin",
+										"about_add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "about_list",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "access_token",
+										"value": "O7KQviEE8APVfpa5PVvX",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
+								"url": {
+									"raw": "http://localhost:3001/api/admin/about_list",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"api",
+										"admin",
+										"about_list"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "restaurant_add",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "access_token",
+								"value": "O7KQviEE8APVfpa5PVvX",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "Minute by tuk tuk",
+									"type": "default"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/Users/CodeForAny/Desktop/CodeForAny/Flutter/food_delivery/assets/img/res_1.png"
+								},
+								{
+									"key": "shop_type",
+									"value": "Cafa",
+									"type": "default"
+								},
+								{
+									"key": "food_type",
+									"value": "Western Food",
+									"type": "default"
+								},
+								{
+									"key": "address",
+									"value": "4 Road",
+									"type": "default"
+								},
+								{
+									"key": "city",
+									"value": "Surat",
+									"type": "default"
+								},
+								{
+									"key": "state",
+									"value": "Gujarat",
+									"type": "default"
+								},
+								{
+									"key": "latitude",
+									"value": "21.18097053697036",
+									"type": "default"
+								},
+								{
+									"key": "longitude",
+									"value": "72.83328257789638",
+									"type": "default"
+								},
+								{
+									"key": "delivery_cost",
+									"value": "3",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/admin/restaurant_add",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"admin",
+								"restaurant_add"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "restaurant_update",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "access_token",
+								"value": "O7KQviEE8APVfpa5PVvX",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "restaurant_id",
+									"value": "1",
+									"type": "default"
+								},
+								{
+									"key": "name",
+									"value": "Minute by tuk tuk",
+									"type": "text"
+								},
+								{
+									"key": "shop_type",
+									"value": "Cafa",
+									"type": "text"
+								},
+								{
+									"key": "food_type",
+									"value": "Western Food",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "4 Road",
+									"type": "text"
+								},
+								{
+									"key": "city",
+									"value": "Surat",
+									"type": "text"
+								},
+								{
+									"key": "state",
+									"value": "Gujarat",
+									"type": "text"
+								},
+								{
+									"key": "latitude",
+									"value": "21.18097053697036",
+									"type": "text"
+								},
+								{
+									"key": "longitude",
+									"value": "72.83328257789638",
+									"type": "text"
+								},
+								{
+									"key": "delivery_cost",
+									"value": "3",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/admin/restaurant_update",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"admin",
+								"restaurant_update"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "restaurant_update_image",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "access_token",
+								"value": "O7KQviEE8APVfpa5PVvX",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "restaurant_id",
+									"value": "1",
+									"type": "default"
+								},
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/Users/CodeForAny/Desktop/CodeForAny/Flutter/food_delivery/assets/img/res_2.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/admin/restaurant_update_image",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"admin",
+								"restaurant_update_image"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "restaurant_list",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "access_token",
+								"value": "O7KQviEE8APVfpa5PVvX",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/admin/restaurant_list",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"admin",
+								"restaurant_list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "restaurant_delete",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "access_token",
+								"value": "O7KQviEE8APVfpa5PVvX",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "restaurant_id",
+									"value": "1",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3001/api/admin/restaurant_delete",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"api",
+								"admin",
+								"restaurant_delete"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "login",
 			"request": {
 				"method": "POST",
@@ -22,6 +950,11 @@
 							"key": "password",
 							"value": "123456",
 							"type": "default"
+						},
+						{
+							"key": "push_token",
+							"value": "",
+							"type": "default"
 						}
 					]
 				},
@@ -35,172 +968,6 @@
 					"path": [
 						"api",
 						"login"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "sign_up",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "name",
-							"value": "test_user",
-							"type": "default"
-						},
-						{
-							"key": "mobile",
-							"value": "9876543210",
-							"type": "default"
-						},
-						{
-							"key": "email",
-							"value": "testuser1@gmail.com",
-							"type": "default"
-						},
-						{
-							"key": "password",
-							"value": "123456",
-							"type": "default"
-						},
-						{
-							"key": "address",
-							"value": "ST",
-							"type": "default"
-						},
-						{
-							"key": "device_type",
-							"value": "I",
-							"description": "I = iOS, A = Android",
-							"type": "default"
-						},
-						{
-							"key": "push_token",
-							"value": "",
-							"type": "default"
-						}
-					]
-				},
-				"url": {
-					"raw": "http://localhost:3001/api/sign_up",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3001",
-					"path": [
-						"api",
-						"sign_up"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "forgot_password_request",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "email",
-							"value": "testuser1@gmail.com",
-							"type": "default"
-						}
-					]
-				},
-				"url": {
-					"raw": "http://localhost:3001/api/forgot_password_request",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3001",
-					"path": [
-						"api",
-						"forgot_password_request"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "forgot_password_verify",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "email",
-							"value": "testuser1@gmail.com",
-							"type": "default"
-						},
-						{
-							"key": "reset_code",
-							"value": "",
-							"type": "default"
-						}
-					]
-				},
-				"url": {
-					"raw": "http://localhost:3001/api/forgot_password_verify",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3001",
-					"path": [
-						"api",
-						"forgot_password_verify"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "forgot_password_set_new",
-			"request": {
-				"method": "POST",
-				"header": [],
-				"body": {
-					"mode": "urlencoded",
-					"urlencoded": [
-						{
-							"key": "user_id",
-							"value": "2",
-							"type": "default"
-						},
-						{
-							"key": "reset_code",
-							"value": "238422",
-							"type": "default"
-						},
-						{
-							"key": "new_password",
-							"value": "12345678",
-							"type": "default"
-						}
-					]
-				},
-				"url": {
-					"raw": "http://localhost:3001/api/forgot_password_set_new",
-					"protocol": "http",
-					"host": [
-						"localhost"
-					],
-					"port": "3001",
-					"path": [
-						"api",
-						"forgot_password_set_new"
 					]
 				}
 			},

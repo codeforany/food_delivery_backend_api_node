@@ -496,6 +496,943 @@
 					]
 				},
 				{
+					"name": "category",
+					"item": [
+						{
+							"name": "category_add",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "access_token",
+										"value": "O7KQviEE8APVfpa5PVvX",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Offers",
+											"type": "default"
+										},
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/Users/CodeForAny/Desktop/CodeForAny/Flutter/food_delivery/assets/img/cat_offer.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3001/api/admin/category_add",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"api",
+										"admin",
+										"category_add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "category_update",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "access_token",
+										"value": "O7KQviEE8APVfpa5PVvX",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Offer1",
+											"type": "default"
+										},
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/Users/CodeForAny/Desktop/CodeForAny/Flutter/food_delivery/assets/img/cat_offer.png"
+										},
+										{
+											"key": "category_id",
+											"value": "1",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3001/api/admin/category_update",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"api",
+										"admin",
+										"category_update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "category_list",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "access_token",
+										"value": "O7KQviEE8APVfpa5PVvX",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
+								"url": {
+									"raw": "http://localhost:3001/api/admin/category_list",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"api",
+										"admin",
+										"category_list"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "category_delete",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "access_token",
+										"value": "O7KQviEE8APVfpa5PVvX",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "category_id",
+											"value": "1",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3001/api/admin/category_delete",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"api",
+										"admin",
+										"category_delete"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "menu",
+					"item": [
+						{
+							"name": "menu item",
+							"item": [
+								{
+									"name": "portion",
+									"item": [
+										{
+											"name": "portion_add",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "access_token",
+														"value": "O7KQviEE8APVfpa5PVvX",
+														"type": "default"
+													}
+												],
+												"body": {
+													"mode": "urlencoded",
+													"urlencoded": [
+														{
+															"key": "name",
+															"value": "big",
+															"type": "default"
+														},
+														{
+															"key": "addition_price",
+															"value": "1",
+															"type": "default"
+														},
+														{
+															"key": "menu_item_id",
+															"value": "1",
+															"type": "default"
+														}
+													]
+												},
+												"url": {
+													"raw": "http://localhost:3001/api/admin/portion_add",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "3001",
+													"path": [
+														"api",
+														"admin",
+														"portion_add"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "portion_update",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "access_token",
+														"value": "O7KQviEE8APVfpa5PVvX",
+														"type": "default"
+													}
+												],
+												"body": {
+													"mode": "urlencoded",
+													"urlencoded": [
+														{
+															"key": "name",
+															"value": "small",
+															"type": "text"
+														},
+														{
+															"key": "addition_price",
+															"value": "1",
+															"type": "text"
+														},
+														{
+															"key": "menu_item_id",
+															"value": "1",
+															"type": "text"
+														},
+														{
+															"key": "portion_id",
+															"value": "1",
+															"type": "default"
+														}
+													]
+												},
+												"url": {
+													"raw": "http://localhost:3001/api/admin/portion_update",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "3001",
+													"path": [
+														"api",
+														"admin",
+														"portion_update"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "portion_delete",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "access_token",
+														"value": "O7KQviEE8APVfpa5PVvX",
+														"type": "default"
+													}
+												],
+												"body": {
+													"mode": "urlencoded",
+													"urlencoded": [
+														{
+															"key": "portion_id",
+															"value": "1",
+															"type": "default"
+														},
+														{
+															"key": "menu_item_id",
+															"value": "1",
+															"type": "default"
+														}
+													]
+												},
+												"url": {
+													"raw": "http://localhost:3001/api/admin/portion_delete",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "3001",
+													"path": [
+														"api",
+														"admin",
+														"portion_delete"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "portion_list",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "access_token",
+														"value": "O7KQviEE8APVfpa5PVvX",
+														"type": "default"
+													}
+												],
+												"body": {
+													"mode": "urlencoded",
+													"urlencoded": [
+														{
+															"key": "menu_item_id",
+															"value": "1",
+															"type": "default"
+														}
+													]
+												},
+												"url": {
+													"raw": "http://localhost:3001/api/admin/portion_list",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "3001",
+													"path": [
+														"api",
+														"admin",
+														"portion_list"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "ingredient",
+									"item": [
+										{
+											"name": "ingredient_add",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "access_token",
+														"value": "O7KQviEE8APVfpa5PVvX",
+														"type": "default"
+													}
+												],
+												"body": {
+													"mode": "urlencoded",
+													"urlencoded": [
+														{
+															"key": "name",
+															"value": "Extra Mayonnaise",
+															"type": "default"
+														},
+														{
+															"key": "addition_price",
+															"value": "1",
+															"type": "default"
+														},
+														{
+															"key": "menu_item_id",
+															"value": "1",
+															"type": "default"
+														}
+													]
+												},
+												"url": {
+													"raw": "http://localhost:3001/api/admin/ingredient_add",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "3001",
+													"path": [
+														"api",
+														"admin",
+														"ingredient_add"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "ingredient_update",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "access_token",
+														"value": "O7KQviEE8APVfpa5PVvX",
+														"type": "default"
+													}
+												],
+												"body": {
+													"mode": "urlencoded",
+													"urlencoded": [
+														{
+															"key": "name",
+															"value": "Extra Mayonnaise",
+															"type": "text"
+														},
+														{
+															"key": "addition_price",
+															"value": "2",
+															"type": "text"
+														},
+														{
+															"key": "menu_item_id",
+															"value": "1",
+															"type": "text"
+														},
+														{
+															"key": "ingredient_id",
+															"value": "1",
+															"type": "default"
+														}
+													]
+												},
+												"url": {
+													"raw": "http://localhost:3001/api/admin/ingredient_update",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "3001",
+													"path": [
+														"api",
+														"admin",
+														"ingredient_update"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "ingredient_delete",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "access_token",
+														"value": "O7KQviEE8APVfpa5PVvX",
+														"type": "default"
+													}
+												],
+												"body": {
+													"mode": "urlencoded",
+													"urlencoded": [
+														{
+															"key": "ingredient_id",
+															"value": "1",
+															"type": "default"
+														},
+														{
+															"key": "menu_item_id",
+															"value": "1",
+															"type": "default"
+														}
+													]
+												},
+												"url": {
+													"raw": "http://localhost:3001/api/admin/ingredient_delete",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "3001",
+													"path": [
+														"api",
+														"admin",
+														"ingredient_delete"
+													]
+												}
+											},
+											"response": []
+										},
+										{
+											"name": "ingredient_list",
+											"request": {
+												"method": "POST",
+												"header": [
+													{
+														"key": "access_token",
+														"value": "O7KQviEE8APVfpa5PVvX",
+														"type": "default"
+													}
+												],
+												"body": {
+													"mode": "urlencoded",
+													"urlencoded": [
+														{
+															"key": "menu_item_id",
+															"value": "1",
+															"type": "default"
+														}
+													]
+												},
+												"url": {
+													"raw": "http://localhost:3001/api/admin/ingredient_list",
+													"protocol": "http",
+													"host": [
+														"localhost"
+													],
+													"port": "3001",
+													"path": [
+														"api",
+														"admin",
+														"ingredient_list"
+													]
+												}
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "menu_item_add",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "access_token",
+												"value": "O7KQviEE8APVfpa5PVvX",
+												"type": "default"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "name",
+													"value": "French Apple Pie",
+													"type": "default"
+												},
+												{
+													"key": "image",
+													"type": "file",
+													"src": "/Users/CodeForAny/Desktop/CodeForAny/Flutter/food_delivery/assets/img/dess_1.png"
+												},
+												{
+													"key": "menu_id",
+													"value": "1",
+													"type": "default"
+												},
+												{
+													"key": "restaurant_id",
+													"value": "1",
+													"type": "default"
+												},
+												{
+													"key": "category_id",
+													"value": "1",
+													"type": "default"
+												},
+												{
+													"key": "food_type",
+													"value": "Desserts",
+													"type": "default"
+												},
+												{
+													"key": "is_portion_allow",
+													"value": "1",
+													"type": "default"
+												},
+												{
+													"key": "is_custom_ingredient_allow",
+													"value": "1",
+													"type": "default"
+												},
+												{
+													"key": "description",
+													"value": "description",
+													"type": "default"
+												},
+												{
+													"key": "base_price",
+													"value": "15",
+													"type": "default"
+												}
+											]
+										},
+										"url": {
+											"raw": "http://localhost:3001/api/admin/menu_item_add",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3001",
+											"path": [
+												"api",
+												"admin",
+												"menu_item_add"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "menu_item_update",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "access_token",
+												"value": "O7KQviEE8APVfpa5PVvX",
+												"type": "default"
+											}
+										],
+										"body": {
+											"mode": "formdata",
+											"formdata": [
+												{
+													"key": "name",
+													"value": "Fudgy Chewy Brownies",
+													"type": "text"
+												},
+												{
+													"key": "menu_id",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "restaurant_id",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "category_id",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "food_type",
+													"value": "Desserts",
+													"type": "text"
+												},
+												{
+													"key": "is_portion_allow",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "is_custom_ingredient_allow",
+													"value": "1",
+													"type": "text"
+												},
+												{
+													"key": "description",
+													"value": "description",
+													"type": "text"
+												},
+												{
+													"key": "base_price",
+													"value": "15",
+													"type": "text"
+												},
+												{
+													"key": "image",
+													"type": "file",
+													"src": "/Users/CodeForAny/Desktop/CodeForAny/Flutter/food_delivery/assets/img/dess_3.png"
+												},
+												{
+													"key": "menu_item_id",
+													"value": "2",
+													"type": "default"
+												}
+											]
+										},
+										"url": {
+											"raw": "http://localhost:3001/api/admin/menu_item_update",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3001",
+											"path": [
+												"api",
+												"admin",
+												"menu_item_update"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "menu_item_list",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "access_token",
+												"value": "O7KQviEE8APVfpa5PVvX",
+												"type": "default"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": []
+										},
+										"url": {
+											"raw": "http://localhost:3001/api/admin/menu_item_list",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3001",
+											"path": [
+												"api",
+												"admin",
+												"menu_item_list"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "menu_item_delete",
+									"request": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "access_token",
+												"value": "O7KQviEE8APVfpa5PVvX",
+												"type": "default"
+											}
+										],
+										"body": {
+											"mode": "urlencoded",
+											"urlencoded": [
+												{
+													"key": "menu_item_id",
+													"value": "1",
+													"type": "default"
+												},
+												{
+													"key": "restaurant_id",
+													"value": "1",
+													"type": "default"
+												}
+											]
+										},
+										"url": {
+											"raw": "http://localhost:3001/api/admin/menu_item_delete",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3001",
+											"path": [
+												"api",
+												"admin",
+												"menu_item_delete"
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "menu_add",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "access_token",
+										"value": "O7KQviEE8APVfpa5PVvX",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Promotions",
+											"type": "default"
+										},
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/Users/CodeForAny/Desktop/CodeForAny/Flutter/food_delivery/assets/img/menu_4.png"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3001/api/admin/menu_add",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"api",
+										"admin",
+										"menu_add"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "menu_update",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "access_token",
+										"value": "O7KQviEE8APVfpa5PVvX",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": "Fast Food",
+											"type": "default"
+										},
+										{
+											"key": "image",
+											"type": "file",
+											"src": "/Users/CodeForAny/Desktop/CodeForAny/Flutter/food_delivery/assets/img/menu_1.png"
+										},
+										{
+											"key": "menu_id",
+											"value": "1",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3001/api/admin/menu_update",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"api",
+										"admin",
+										"menu_update"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "menu_list",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "access_token",
+										"value": "O7KQviEE8APVfpa5PVvX",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": []
+								},
+								"url": {
+									"raw": "http://localhost:3001/api/admin/menu_list",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"api",
+										"admin",
+										"menu_list"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "menu_delete",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "access_token",
+										"value": "O7KQviEE8APVfpa5PVvX",
+										"type": "default"
+									}
+								],
+								"body": {
+									"mode": "urlencoded",
+									"urlencoded": [
+										{
+											"key": "menu_id",
+											"value": "1",
+											"type": "default"
+										}
+									]
+								},
+								"url": {
+									"raw": "http://localhost:3001/api/admin/menu_delete",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3001",
+									"path": [
+										"api",
+										"admin",
+										"menu_delete"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
 					"name": "about",
 					"item": [
 						{

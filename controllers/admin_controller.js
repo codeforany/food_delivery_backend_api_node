@@ -14,15 +14,38 @@ module.exports.controller = (app, io, socket_list) => {
     const msg_exits_email = "already used this email";
     const msg_exits_user = "user not exits";
     const msg_update_password = "user password updated successfully";
+
     const msg_add_restaurant = "Restaurant added Successfully.";
     const msg_update_restaurant = "Restaurant updated Successfully.";
     const msg_delete_restaurant = "Restaurant deleted Successfully.";
+
     const msg_add_restaurant_offer = "Restaurant offer added Successfully.";
     const msg_update_restaurant_offer = "Restaurant offer updated Successfully.";
     const msg_delete_restaurant_offer = "Restaurant offer deleted Successfully.";
+
     const msg_add = "Added Successfully.";
     const msg_update = "Updated Successfully.";
     const msg_delete = "Deleted Successfully.";
+
+    const msg_add_category = "Category added Successfully.";
+    const msg_update_category = "Category updated Successfully.";
+    const msg_delete_category = "Category deleted Successfully.";
+
+    const msg_add_menu = "Menu added Successfully.";
+    const msg_update_menu = "Menu updated Successfully.";
+    const msg_delete_menu = "Menu deleted Successfully.";
+
+    const msg_add_menu_item = "Menu Item added Successfully.";
+    const msg_update_menu_item = "Menu Item updated Successfully.";
+    const msg_delete_menu_item = "Menu Item deleted Successfully.";
+
+    const msg_add_portion = "Menu portion added Successfully.";
+    const msg_update_portion = "Menu portion updated Successfully.";
+    const msg_delete_portion = "Menu portion deleted Successfully.";
+
+    const msg_add_ingredient = "Menu ingredient added Successfully.";
+    const msg_update_ingredient = "Menu ingredient updated Successfully.";
+    const msg_delete_ingredient = "Menu ingredient deleted Successfully.";
 
 
     app.post('/api/admin/restaurant_add', (req, res) => {
@@ -460,7 +483,6 @@ module.exports.controller = (app, io, socket_list) => {
         }, "3")
     })
 
-
     app.post('/api/admin/about_delete', (req, res) => {
         helper.Dlog(req.body);
         var reqObj = req.body;
@@ -479,6 +501,656 @@ module.exports.controller = (app, io, socket_list) => {
                         } else {
                             res.json({ "status": "0", "message": msg_fail })
                         }
+                    })
+            })
+        }, "3")
+    })
+
+    app.post('/api/admin/category_add', (req, res) => {
+
+        var form = new multiparty.Form();
+
+        checkAccessToken(req.headers, res, (userObj) => {
+            form.parse(req, (err, reqObj, files) => {
+                if (err) {
+                    helper.ThrowHtmlError(err, res);
+                    return;
+                }
+
+                helper.Dlog("--------------- Parameter --------------")
+                helper.Dlog(reqObj);
+                helper.Dlog("--------------- Files --------------")
+                helper.Dlog(files);
+
+                helper.CheckParameterValid(res, reqObj, ["name"], () => {
+
+                    helper.CheckParameterValid(res, files, ["image"], () => {
+
+                        var extension = files.image[0].originalFilename.substring(files.image[0].originalFilename.lastIndexOf(".") + 1);
+                        var imageFileName = "category/" + helper.fileNameGenerate(extension);
+
+                        var newPath = imageSavePath + imageFileName;
+
+                        fs.rename(files.image[0].path, newPath, (err) => {
+
+                            if (err) {
+                                helper.ThrowHtmlError(err, res);
+                                return;
+                            } else {
+                                db.query("INSERT INTO `category_detail`( `name`, `image`, `create_date`, `update_date`) VALUES (?,?, NOW(), NOW())", [
+                                    reqObj.name[0], imageFileName
+                                ], (err, result) => {
+
+                                    if (err) {
+                                        helper.ThrowHtmlError(err, res);
+                                        return;
+                                    }
+
+                                    if (result) {
+                                        res.json({ "status": "1", "message": msg_add_category })
+                                    } else {
+                                        res.json({ "status": "0", "message": msg_fail })
+                                    }
+                                })
+                            }
+                        })
+
+                    })
+                })
+
+
+            })
+        }, "3")
+
+    })
+
+    app.post('/api/admin/category_update', (req, res) => {
+
+        var form = new multiparty.Form();
+
+        checkAccessToken(req.headers, res, (userObj) => {
+            form.parse(req, (err, reqObj, files) => {
+                if (err) {
+                    helper.ThrowHtmlError(err, res);
+                    return;
+                }
+
+                helper.Dlog("--------------- Parameter --------------")
+                helper.Dlog(reqObj);
+                helper.Dlog("--------------- Files --------------")
+                helper.Dlog(files);
+
+                helper.CheckParameterValid(res, reqObj, ["category_id", "name"], () => {
+
+
+                    var condition = ""
+                    var imageFileName = ""
+                    if (files.image != undefined || files.image != null) {
+                        var extension = files.image[0].originalFilename.substring(files.image[0].originalFilename.lastIndexOf(".") + 1);
+                        imageFileName = "category/" + helper.fileNameGenerate(extension);
+                        newPath = imageSavePath + imageFileName;
+                        condition = " `image` = '" + imageFileName + "',"
+                        fs.rename(files.image[0].path, newPath, (err) => {
+                            if (err) {
+                                helper.ThrowHtmlError(err);
+                                return;
+                            }
+                        })
+                    }
+
+                    db.query("UPDATE `category_detail` SET `name` = ?, " + condition + " `update_date` = NOW() WHERE `status` < ? AND `category_id` = ? ", [
+                        reqObj.name[0], "2", reqObj.category_id[0]
+                    ], (err, result) => {
+
+                        if (err) {
+                            helper.ThrowHtmlError(err, res);
+                            return;
+                        }
+
+                        if (result) {
+                            res.json({ "status": "1", "message": msg_update_category })
+                        } else {
+                            res.json({ "status": "0", "message": msg_fail })
+                        }
+                    })
+
+                })
+
+
+
+            })
+        }, "3")
+
+    })
+
+    app.post('/api/admin/category_delete', (req, res) => {
+        helper.Dlog(req.body);
+        var reqObj = req.body;
+
+        checkAccessToken(req.headers, res, (userObj) => {
+            helper.CheckParameterValid(res, reqObj, ["category_id"], () => {
+
+
+                db.query('UPDATE `category_detail` SET `status`=?,`update_date`=NOW() WHERE `category_id` = ? AND `status` != ? ', [
+                    "2", reqObj.category_id, "2"], (err, uResult) => {
+                        if (err) {
+                            helper.ThrowHtmlError(err, res);
+                            return
+                        }
+
+                        if (uResult.affectedRows > 0) {
+                            res.json({ "status": "1", "message": msg_delete_category })
+                        } else {
+                            res.json({ "status": "0", "message": msg_fail })
+                        }
+                    })
+            })
+
+        }, "3")
+    })
+
+    app.post('/api/admin/category_list', (req, res) => {
+        helper.Dlog(req.body);
+        var reqObj = req.body;
+
+        checkAccessToken(req.headers, res, (userObj) => {
+
+            db.query('SELECT `category_id`, `name`, `image`, `create_date`, `update_date` FROM `category_detail` WHERE `status` != ? ', [
+                "2"], (err, result) => {
+                    if (err) {
+                        helper.ThrowHtmlError(err, res);
+                        return
+                    }
+                    res.json({ "status": "1", "payload": result.replace_null(), "message": msg_success })
+                })
+        }, "3")
+    })
+
+    app.post('/api/admin/menu_add', (req, res) => {
+
+        var form = new multiparty.Form();
+
+        checkAccessToken(req.headers, res, (userObj) => {
+            form.parse(req, (err, reqObj, files) => {
+                if (err) {
+                    helper.ThrowHtmlError(err, res);
+                    return;
+                }
+
+                helper.Dlog("--------------- Parameter --------------")
+                helper.Dlog(reqObj);
+                helper.Dlog("--------------- Files --------------")
+                helper.Dlog(files);
+
+                helper.CheckParameterValid(res, reqObj, ["name"], () => {
+
+                    helper.CheckParameterValid(res, files, ["image"], () => {
+
+                        var extension = files.image[0].originalFilename.substring(files.image[0].originalFilename.lastIndexOf(".") + 1);
+                        var imageFileName = "menu/" + helper.fileNameGenerate(extension);
+
+                        var newPath = imageSavePath + imageFileName;
+
+                        fs.rename(files.image[0].path, newPath, (err) => {
+
+                            if (err) {
+                                helper.ThrowHtmlError(err, res);
+                                return;
+                            } else {
+                                db.query("INSERT INTO `menu_detail`( `name`, `image`, `create_date`, `update_date`) VALUES (?,?, NOW(), NOW())", [
+                                    reqObj.name[0], imageFileName
+                                ], (err, result) => {
+
+                                    if (err) {
+                                        helper.ThrowHtmlError(err, res);
+                                        return;
+                                    }
+
+                                    if (result) {
+                                        res.json({ "status": "1", "message": msg_add_menu })
+                                    } else {
+                                        res.json({ "status": "0", "message": msg_fail })
+                                    }
+                                })
+                            }
+                        })
+
+                    })
+                })
+
+
+            })
+        }, "3")
+
+    })
+
+    app.post('/api/admin/menu_update', (req, res) => {
+
+        var form = new multiparty.Form();
+
+        checkAccessToken(req.headers, res, (userObj) => {
+            form.parse(req, (err, reqObj, files) => {
+                if (err) {
+                    helper.ThrowHtmlError(err, res);
+                    return;
+                }
+
+                helper.Dlog("--------------- Parameter --------------")
+                helper.Dlog(reqObj);
+                helper.Dlog("--------------- Files --------------")
+                helper.Dlog(files);
+
+                helper.CheckParameterValid(res, reqObj, ["menu_id", "name"], () => {
+
+
+                    var condition = ""
+                    var imageFileName = ""
+                    if (files.image != undefined || files.image != null) {
+                        var extension = files.image[0].originalFilename.substring(files.image[0].originalFilename.lastIndexOf(".") + 1);
+                        imageFileName = "menu/" + helper.fileNameGenerate(extension);
+                        newPath = imageSavePath + imageFileName;
+                        condition = " `image` = '" + imageFileName + "',"
+                        fs.rename(files.image[0].path, newPath, (err) => {
+                            if (err) {
+                                helper.ThrowHtmlError(err);
+                                return;
+                            }
+                        })
+                    }
+
+                    db.query("UPDATE `menu_detail` SET `name` = ?, " + condition + " `update_date` = NOW() WHERE `status` < ? AND `menu_id` = ? ", [
+                        reqObj.name[0], "2", reqObj.menu_id[0]
+                    ], (err, result) => {
+
+                        if (err) {
+                            helper.ThrowHtmlError(err, res);
+                            return;
+                        }
+
+                        if (result) {
+                            res.json({ "status": "1", "message": msg_update_menu })
+                        } else {
+                            res.json({ "status": "0", "message": msg_fail })
+                        }
+                    })
+
+                })
+            })
+        }, "3")
+
+    })
+
+    app.post('/api/admin/menu_delete', (req, res) => {
+        helper.Dlog(req.body);
+        var reqObj = req.body;
+
+        checkAccessToken(req.headers, res, (userObj) => {
+            helper.CheckParameterValid(res, reqObj, ["menu_id"], () => {
+
+
+                db.query('UPDATE `menu_detail` SET `status`=?,`update_date`=NOW() WHERE `menu_id` = ? AND `status` != ? ', [
+                    "2", reqObj.menu_id, "2"], (err, uResult) => {
+                        if (err) {
+                            helper.ThrowHtmlError(err, res);
+                            return
+                        }
+
+                        if (uResult.affectedRows > 0) {
+                            res.json({ "status": "1", "message": msg_delete_menu })
+                        } else {
+                            res.json({ "status": "0", "message": msg_fail })
+                        }
+                    })
+            })
+
+        }, "3")
+    })
+
+    app.post('/api/admin/menu_list', (req, res) => {
+        helper.Dlog(req.body);
+        var reqObj = req.body;
+
+        checkAccessToken(req.headers, res, (userObj) => {
+
+            db.query('SELECT `menu_id`, `name`, `image`, `create_date`, `update_date` FROM `menu_detail` WHERE `status` != ? ', [
+                "2"], (err, result) => {
+                    if (err) {
+                        helper.ThrowHtmlError(err, res);
+                        return
+                    }
+                    res.json({ "status": "1", "payload": result.replace_null(), "message": msg_success })
+                })
+        }, "3")
+    })
+
+    app.post('/api/admin/menu_item_add', (req, res) => {
+
+        var form = new multiparty.Form();
+
+        checkAccessToken(req.headers, res, (userObj) => {
+            form.parse(req, (err, reqObj, files) => {
+                if (err) {
+                    helper.ThrowHtmlError(err, res);
+                    return;
+                }
+
+                helper.Dlog("--------------- Parameter --------------")
+                helper.Dlog(reqObj);
+                helper.Dlog("--------------- Files --------------")
+                helper.Dlog(files);
+
+                helper.CheckParameterValid(res, reqObj, ["menu_id", "restaurant_id", "category_id", "food_type", "name", "is_portion_allow", "is_custom_ingredient_allow", "description", "base_price"], () => {
+
+                    helper.CheckParameterValid(res, files, ["image"], () => {
+
+                        var extension = files.image[0].originalFilename.substring(files.image[0].originalFilename.lastIndexOf(".") + 1);
+                        var imageFileName = "menu_item/" + helper.fileNameGenerate(extension);
+
+                        var newPath = imageSavePath + imageFileName;
+
+                        fs.rename(files.image[0].path, newPath, (err) => {
+
+                            if (err) {
+                                helper.ThrowHtmlError(err, res);
+                                return;
+                            } else {
+                                db.query("INSERT INTO `menu_item_detail`(`menu_id`, `restaurant_id`, `category_id`, `food_type`, `name`, `image`, `is_portion_allow`, `is_custom_ingredient_allow`, `description`, `base_price`, `create_date`, `update_date`) VALUES (?,?,?, ?,?,?, ?,?,?, ?,NOW(), NOW())", [
+                                    reqObj.menu_id[0], reqObj.restaurant_id[0], reqObj.category_id[0], reqObj.food_type[0], reqObj.name[0], imageFileName, reqObj.is_portion_allow[0], reqObj.is_custom_ingredient_allow[0], reqObj.description[0], reqObj.base_price[0],
+                                ], (err, result) => {
+
+                                    if (err) {
+                                        helper.ThrowHtmlError(err, res);
+                                        return;
+                                    }
+
+                                    if (result) {
+                                        res.json({ "status": "1", "message": msg_add_menu_item })
+                                    } else {
+                                        res.json({ "status": "0", "message": msg_fail })
+                                    }
+                                })
+                            }
+                        })
+
+                    })
+                })
+
+
+            })
+        }, "3")
+
+    })
+
+    app.post('/api/admin/menu_item_update', (req, res) => {
+
+        var form = new multiparty.Form();
+
+        checkAccessToken(req.headers, res, (userObj) => {
+            form.parse(req, (err, reqObj, files) => {
+                if (err) {
+                    helper.ThrowHtmlError(err, res);
+                    return;
+                }
+
+                helper.Dlog("--------------- Parameter --------------")
+                helper.Dlog(reqObj);
+                helper.Dlog("--------------- Files --------------")
+                helper.Dlog(files);
+
+                helper.CheckParameterValid(res, reqObj, ["menu_item_id", "menu_id", "restaurant_id", "category_id", "food_type", "name", "is_portion_allow", "is_custom_ingredient_allow", "description", "base_price"], () => {
+
+
+                    var condition = ""
+                    var imageFileName = ""
+                    if (files.image != undefined || files.image != null) {
+                        var extension = files.image[0].originalFilename.substring(files.image[0].originalFilename.lastIndexOf(".") + 1);
+                        imageFileName = "menu_item/" + helper.fileNameGenerate(extension);
+                        newPath = imageSavePath + imageFileName;
+                        condition = " `image` = '" + imageFileName + "',"
+                        fs.rename(files.image[0].path, newPath, (err) => {
+                            if (err) {
+                                helper.ThrowHtmlError(err);
+                                return;
+                            }
+                        })
+                    }
+
+                    db.query("UPDATE `menu_item_detail` SET  `menu_id` = ?, `category_id` = ?, `food_type` = ?, `name` = ?,  `is_portion_allow` = ?, `is_custom_ingredient_allow` = ?, `description` = ?, `base_price` = ?, " + condition + " `update_date` = NOW() WHERE `status` < ? AND `menu_item_id` = ? AND `restaurant_id` = ? ", [
+                        reqObj.menu_id[0], reqObj.category_id[0], reqObj.food_type[0], reqObj.name[0], reqObj.is_portion_allow[0], reqObj.is_custom_ingredient_allow[0], reqObj.description[0], reqObj.base_price[0], "2", reqObj.menu_item_id[0], reqObj.restaurant_id[0],
+                    ], (err, result) => {
+
+                        if (err) {
+                            helper.ThrowHtmlError(err, res);
+                            return;
+                        }
+
+                        if (result) {
+                            res.json({ "status": "1", "message": msg_update_menu_item })
+                        } else {
+                            res.json({ "status": "0", "message": msg_fail })
+                        }
+                    })
+
+                })
+            })
+        }, "3")
+
+    })
+
+    app.post('/api/admin/menu_item_delete', (req, res) => {
+        helper.Dlog(req.body);
+        var reqObj = req.body;
+
+        checkAccessToken(req.headers, res, (userObj) => {
+            helper.CheckParameterValid(res, reqObj, ["menu_item_id", "restaurant_id"], () => {
+
+
+                db.query('UPDATE `menu_item_detail` SET `status`=?,`update_date`=NOW() WHERE `menu_item_id` = ? AND `status` != ? AND `restaurant_id` = ? ', [
+                    "2", reqObj.menu_item_id, "2", reqObj.restaurant_id], (err, uResult) => {
+                        if (err) {
+                            helper.ThrowHtmlError(err, res);
+                            return
+                        }
+
+                        if (uResult.affectedRows > 0) {
+                            res.json({ "status": "1", "message": msg_delete_menu_item })
+                        } else {
+                            res.json({ "status": "0", "message": msg_fail })
+                        }
+                    })
+            })
+
+        }, "3")
+    })
+
+    app.post('/api/admin/menu_item_list', (req, res) => {
+        helper.Dlog(req.body);
+        var reqObj = req.body;
+
+        checkAccessToken(req.headers, res, (userObj) => {
+
+            db.query('SELECT `menu_item_id`, `menu_id`, `restaurant_id`, `category_id`, `food_type`, `name`, `image`, `is_portion_allow`, `is_custom_ingredient_allow`, `description`, `base_price`, `create_date`, `update_date`  FROM `menu_item_detail` WHERE `status` != ? ', [
+                "2"], (err, result) => {
+                    if (err) {
+                        helper.ThrowHtmlError(err, res);
+                        return
+                    }
+                    res.json({ "status": "1", "payload": result.replace_null(), "message": msg_success })
+                })
+        }, "3")
+    })
+
+    app.post('/api/admin/portion_add', (req, res) => {
+        helper.Dlog(req.body);
+        var reqObj = req.body;
+
+        checkAccessToken(req.headers, res, (userObj) => {
+            helper.CheckParameterValid(res, reqObj, ["menu_item_id", "name", "addition_price"], () => {
+                db.query('INSERT INTO `portion_detail`(`menu_item_id`, `name`, `addition_price` , `create_date`, `update_date`) VALUES (?,?,?, NOW(), NOW() )', [
+                    reqObj.menu_item_id, reqObj.name, reqObj.addition_price], (err, result) => {
+                        if (err) {
+                            helper.ThrowHtmlError(err, res);
+                            return
+                        }
+
+                        if (result) {
+                            res.json({ "status": "1", "message": msg_add_portion })
+                        } else {
+                            res.json({ "status": "0", "message": msg_fail })
+                        }
+
+                    })
+            })
+        }, "3")
+    })
+
+    app.post('/api/admin/portion_update', (req, res) => {
+        helper.Dlog(req.body);
+        var reqObj = req.body;
+
+        checkAccessToken(req.headers, res, (userObj) => {
+            helper.CheckParameterValid(res, reqObj, ["portion_id", "menu_item_id", "name", "addition_price"], () => {
+                db.query('UPDATE `portion_detail` SET `name` = ?, `addition_price` = ?,`update_date` = NOW() WHERE `portion_id` = ?  AND `status` = ? AND `menu_item_id` = ? ', [
+                    reqObj.name, reqObj.addition_price, reqObj.portion_id, "1", reqObj.menu_item_id], (err, result) => {
+                        if (err) {
+                            helper.ThrowHtmlError(err, res);
+                            return
+                        }
+
+                        if (result.affectedRows > 0) {
+                            res.json({ "status": "1", "message": msg_update_portion })
+                        } else {
+                            res.json({ "status": "0", "message": msg_fail })
+                        }
+                    })
+            })
+        }, "3")
+    })
+
+    app.post('/api/admin/portion_delete', (req, res) => {
+        helper.Dlog(req.body);
+        var reqObj = req.body;
+
+        checkAccessToken(req.headers, res, (userObj) => {
+            helper.CheckParameterValid(res, reqObj, ["portion_id", "menu_item_id"], () => {
+                db.query('UPDATE `portion_detail` SET `status` = ?, `update_date` = NOW() WHERE `portion_id` = ?  AND `status` = ? AND `menu_item_id`', [
+                    "2", reqObj.portion_id, "1", reqObj.menu_item_id], (err, result) => {
+                        if (err) {
+                            helper.ThrowHtmlError(err, res);
+                            return
+                        }
+
+                        if (result.affectedRows > 0) {
+                            res.json({ "status": "1", "message": msg_delete_portion })
+                        } else {
+                            res.json({ "status": "0", "message": msg_fail })
+                        }
+                    })
+            })
+        }, "3")
+    })
+
+    app.post('/api/admin/portion_list', (req, res) => {
+        helper.Dlog(req.body);
+        var reqObj = req.body;
+
+        checkAccessToken(req.headers, res, (userObj) => {
+            helper.CheckParameterValid(res, reqObj, ["menu_item_id"], () => {
+                db.query('SELECT `portion_id`, `menu_item_id`, `name`, `addition_price`, `create_date`, `update_date`, `status` FROM `portion_detail` WHERE  `menu_item_id` = ? AND `status` = ?', [
+                    reqObj.menu_item_id, "1"], (err, result) => {
+                        if (err) {
+                            helper.ThrowHtmlError(err, res);
+                            return
+                        }
+                        res.json({ "status": "1", "payload": result.replace_null(), "message": msg_success })
+                    })
+            })
+        }, "3")
+    })
+
+    app.post('/api/admin/ingredient_add', (req, res) => {
+        helper.Dlog(req.body);
+        var reqObj = req.body;
+
+        checkAccessToken(req.headers, res, (userObj) => {
+            helper.CheckParameterValid(res, reqObj, ["menu_item_id", "name", "addition_price"], () => {
+                db.query('INSERT INTO `ingredient_detail`(`menu_item_id`, `name`, `addition_price` , `create_date`, `update_date`) VALUES (?,?,?, NOW(), NOW() )', [
+                    reqObj.menu_item_id, reqObj.name, reqObj.addition_price], (err, result) => {
+                        if (err) {
+                            helper.ThrowHtmlError(err, res);
+                            return
+                        }
+
+                        if (result) {
+                            res.json({ "status": "1", "message": msg_add_ingredient })
+                        } else {
+                            res.json({ "status": "0", "message": msg_fail })
+                        }
+
+                    })
+            })
+        }, "3")
+    })
+
+    app.post('/api/admin/ingredient_update', (req, res) => {
+        helper.Dlog(req.body);
+        var reqObj = req.body;
+
+        checkAccessToken(req.headers, res, (userObj) => {
+            helper.CheckParameterValid(res, reqObj, ["ingredient_id", "menu_item_id", "name", "addition_price"], () => {
+                db.query('UPDATE `ingredient_detail` SET `name` = ?, `addition_price` = ?,`update_date` = NOW() WHERE `ingredient_id` = ?  AND `status` = ? AND `menu_item_id` = ? ', [
+                    reqObj.name, reqObj.addition_price, reqObj.ingredient_id, "1", reqObj.menu_item_id], (err, result) => {
+                        if (err) {
+                            helper.ThrowHtmlError(err, res);
+                            return
+                        }
+
+                        if (result.affectedRows > 0) {
+                            res.json({ "status": "1", "message": msg_update_ingredient })
+                        } else {
+                            res.json({ "status": "0", "message": msg_fail })
+                        }
+                    })
+            })
+        }, "3")
+    })
+
+    app.post('/api/admin/ingredient_delete', (req, res) => {
+        helper.Dlog(req.body);
+        var reqObj = req.body;
+
+        checkAccessToken(req.headers, res, (userObj) => {
+            helper.CheckParameterValid(res, reqObj, ["ingredient_id", "menu_item_id"], () => {
+                db.query('UPDATE `ingredient_detail` SET `status` = ?, `update_date` = NOW() WHERE `ingredient_id` = ?  AND `status` = ? AND `menu_item_id`', [
+                    "2", reqObj.ingredient_id, "1", reqObj.menu_item_id], (err, result) => {
+                        if (err) {
+                            helper.ThrowHtmlError(err, res);
+                            return
+                        }
+
+                        if (result.affectedRows > 0) {
+                            res.json({ "status": "1", "message": msg_delete_ingredient })
+                        } else {
+                            res.json({ "status": "0", "message": msg_fail })
+                        }
+                    })
+            })
+        }, "3")
+    })
+
+    app.post('/api/admin/ingredient_list', (req, res) => {
+        helper.Dlog(req.body);
+        var reqObj = req.body;
+
+        checkAccessToken(req.headers, res, (userObj) => {
+            helper.CheckParameterValid(res, reqObj, ["menu_item_id"], () => {
+                db.query('SELECT `ingredient_id`, `menu_item_id`, `name`, `addition_price`, `create_date`, `update_date`, `status` FROM `ingredient_detail` WHERE  `menu_item_id` = ? AND `status` = ?', [
+                    reqObj.menu_item_id, "1"], (err, result) => {
+                        if (err) {
+                            helper.ThrowHtmlError(err, res);
+                            return
+                        }
+                        res.json({ "status": "1", "payload": result.replace_null(), "message": msg_success })
                     })
             })
         }, "3")
